@@ -24,7 +24,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     define('PKG_NAME','ClientConfig');
     define('PKG_NAME_LOWER',strtolower(PKG_NAME));
     define('PKG_VERSION','1.3.0');
-    define('PKG_RELEASE','pl');
+    define('PKG_RELEASE','dev1');
 
     /* load modx */
     require_once dirname(dirname(__FILE__)) . '/config.core.php';
