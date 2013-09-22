@@ -7,7 +7,7 @@ $plugins[0]->set('id',1);
 $plugins[0]->set('name','ClientConfig');
 $plugins[0]->set('description','Sets system settings from the Client Config CMP.');
 $plugins[0]->set('plugincode', getSnippetContent($sources['plugins'] . 'clientconfig.plugin.php'));
-$plugins[0]->set('category', 0);
+$plugins[0]->set('category', 'ClientConfig');
 
 $events = include $sources['events'].'events.clientconfig.php';
 if (is_array($events) && !empty($events)) {

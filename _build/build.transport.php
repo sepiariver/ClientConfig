@@ -104,7 +104,6 @@ $attributes= array(
     ),
 );
 foreach ($plugins as $plugin) {
-    $plugin->set('category',PKG_NAME);
     $vehicle = $builder->createVehicle($plugin, $attributes);
     $builder->putVehicle($vehicle);
 }
@@ -120,7 +119,6 @@ $attributes= array(
     xPDOTransport::UPDATE_OBJECT => true,
 );
 foreach ($snippets as $snippet) {
-    $snippet->set('category',PKG_NAME);
     $vehicle = $builder->createVehicle($snippet, $attributes);
     $builder->putVehicle($vehicle);
 }
