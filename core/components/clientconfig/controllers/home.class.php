@@ -33,18 +33,15 @@ class ClientConfigHomeManagerController extends ClientConfigManagerController {
                 if (in_array($sa['xtype'],array('checkbox','xcheckbox'))) {
                     $sa['value'] = (bool)$sa['value'];
                 }
+                if ($sa['xtype'] == 'googlefontlist') {
+                    $googleFontsApiKey = $this->modx->getOption('clientconfig.google_fonts_api_key', null, '');
+                    $sa['xtype'] = empty($googleFontsApiKey) ? 'textfield' : $sa['xtype'];
+                }
                 $grp['items'][] = $sa;
             }
             $tabs[] = $grp;
         }
-
-        $this->addHtml('<script type="text/javascript">
-        Ext.onReady(function() {
-            ClientConfig.data = '.$this->modx->toJSON($tabs).';
-            ClientConfig.isAdmin = ' . (($this->clientconfig->hasAdminPermission()) ? '1' : '0') .';
-            MODx.load({ xtype: "clientconfig-page-home" });
-        });
-        </script>');
+        $this->tabs = $tabs;
 
         $this->loadRichTextEditor();
     }
@@ -70,7 +67,15 @@ class ClientConfigHomeManagerController extends ClientConfigManagerController {
 
         $this->addJavascript($this->clientconfig->config['jsUrl'].'mgr/extras/colorpicker/colorpicker.js');
         $this->addJavascript($this->clientconfig->config['jsUrl'].'mgr/extras/colorpicker/colorpickerfield.js');
+        $this->addJavascript($this->clientconfig->config['jsUrl'].'mgr/widgets/combos.js');
         $this->addLastJavascript($this->clientconfig->config['jsUrl'].'mgr/sections/home.js');
+        $this->addHtml('<script type="text/javascript">
+        Ext.onReady(function() {
+            ClientConfig.data = '.$this->modx->toJSON($this->tabs).';
+            ClientConfig.isAdmin = ' . (($this->clientconfig->hasAdminPermission()) ? '1' : '0') .';
+            MODx.load({ xtype: "clientconfig-page-home" });
+        });
+        </script>');
     }
 
     /**
