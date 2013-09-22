@@ -23,7 +23,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME','ClientConfig');
     define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-    define('PKG_VERSION','1.3.0');
+    define('PKG_VERSION','1.3.1');
     define('PKG_RELEASE','dev1');
 
     /* load modx */
@@ -104,6 +104,7 @@ $attributes= array(
     ),
 );
 foreach ($plugins as $plugin) {
+    $plugin->set('category',PKG_NAME);
     $vehicle = $builder->createVehicle($plugin, $attributes);
     $builder->putVehicle($vehicle);
 }
@@ -119,6 +120,7 @@ $attributes= array(
     xPDOTransport::UPDATE_OBJECT => true,
 );
 foreach ($snippets as $snippet) {
+    $snippet->set('category',PKG_NAME);
     $vehicle = $builder->createVehicle($snippet, $attributes);
     $builder->putVehicle($vehicle);
 }
